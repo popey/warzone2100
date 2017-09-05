@@ -9,13 +9,14 @@ description: |
 
   Warzone 2100 was originally developed as a commercial game by Pumpkin Studios and published in 1999, and was released as open source by them in 2004, for the community to continue working on it.
 
-confinement: devmode
+confinement: strict
 
 apps:
   warzone2100:
     command: desktop-launch $SNAP/usr/bin/warzone2100
     plugs:
       - network
+      - network-bind
       - opengl
       - pulseaudio
       - unity7
