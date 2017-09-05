@@ -1,15 +1,75 @@
-name: my-snap-name # you probably want to 'snapcraft register <name>'
-version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
-summary: Single-line elevator pitch for your amazing snap # 79 char long summary
+name: warzone2100
+version: '3.2.3'
+summary: A free and open source real time strategy game
 description: |
-  This is my-snap's description. You have a paragraph or two to tell the
-  most important story about your snap. Keep it under 100 words though,
-  we live in tweetspace and your description wants to look good in the snap
-  store.
+  In Warzone 2100, you command the forces of The Project in a battle to rebuild the world after mankind has almost been destroyed by nuclear missiles.
+  
+  The game offers campaign, multi-player, and single-player skirmish modes. An extensive tech tree with over 400 different technologies, combined with the unit design system, allows for a wide variety of possible units and tactics.
+  
+  Warzone 2100 was originally developed as a commercial game by Pumpkin Studios and published in 1999, and was released as open source by them in 2004, for the community to continue working on it.
 
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
+apps:
+  warzone2100:
+    command: desktop-launch $SNAP/usr/bin/warzone2100
+    plugs:
+      - network
+      - opengl
+      - pulseaudio
+      - unity7
+      - x11
+
 parts:
-  my-part:
-    # See 'snapcraft plugins'
-    plugin: nil
+  warzone2100:
+    after: [desktop-qt5]
+    source: https://github.com/Warzone2100/warzone2100.git
+    source-type: git
+    source-tag: '3.2.3'
+    source-depth: 1
+    plugin: autotools
+    configflags:
+      - --prefix=/usr
+      - --disable-debug
+    build-packages:
+      - gettext
+      - libcrypto++-dev
+      - libcryptsetup-dev
+      - libfontconfig1-dev
+      - libfreetype6-dev
+      - libfribidi-dev
+      - libglc-dev
+      - libglew-dev
+      - libharfbuzz-dev
+      - libopenal-dev
+      - libphysfs-dev
+      - libpng-dev
+      - libqt5opengl5-dev
+      - libsdl2-dev
+      - libssl-dev
+      - libtheora-dev
+      - libvorbis-dev
+      - qtbase5-dev
+      - qtscript5-dev
+      - unzip
+      - zip
+    stage-packages:
+      - libcrypto++9v5
+      - libcryptsetup4
+      - libfontconfig1
+      - libfreetype6
+      - libfribidi0
+      - libglc0
+      - libglew1.13
+      - libharfbuzz0b
+      - libopenal1
+      - libphysfs1
+      - libpng12-0
+      - libqt5opengl5
+      - libqt5script5
+      - libsdl2-2.0-0
+      - libssl1.0.0
+      - libtheora0
+      - libvorbis0a
+      - unzip
+      - zip
