@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Warzone 2100
+GenericName=Strategy Game
+Comment=Postnuclear realtime strategy
+Icon=${SNAP}/usr/share/icons/warzone2100.png
+TryExec=warzone2100
+Exec=warzone2100
+Categories=Game;StrategyGame;

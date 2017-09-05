@@ -1,6 +1,7 @@
 name: warzone2100
 version: '3.2.3'
 summary: A free and open source real time strategy game
+icon: icons/warzone2100.large.png
 description: |
   In Warzone 2100, you command the forces of The Project in a battle to rebuild the world after mankind has almost been destroyed by nuclear missiles.
   
@@ -8,7 +9,7 @@ description: |
   
   Warzone 2100 was originally developed as a commercial game by Pumpkin Studios and published in 1999, and was released as open source by them in 2004, for the community to continue working on it.
 
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: devmode
 
 apps:
   warzone2100:
