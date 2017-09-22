@@ -22,7 +22,21 @@ apps:
       - unity7
       - x11
 
+  download-videos:
+    command: download-videos
+    plugs: [network]
+
 parts:
+  scripts:
+    plugin: dump
+    source: scripts
+    prepare: |
+      chmod +x download-videos
+    organize:
+      download-videos: bin/download-videos
+    stage-packages:
+      - curl
+
   warzone2100:
     after: [desktop-qt5]
     source: https://github.com/Warzone2100/warzone2100.git
