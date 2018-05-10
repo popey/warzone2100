@@ -15,7 +15,6 @@ distributions.</p>
 
 ## Install
 
-    sudo apt install snapd-xdg-open
     sudo snap install warzone2100 --beta
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
