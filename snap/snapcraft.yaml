@@ -1,5 +1,6 @@
 name: warzone2100
-version: '3.2.3'
+version: stable
+version-script: git -C parts/warzone2100/build describe --dirty 
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
 description: |
@@ -30,8 +31,9 @@ parts:
   scripts:
     plugin: dump
     source: scripts
-    prepare: |
+    override-build: |
       chmod +x download-videos
+      snapcraftctl build
     organize:
       download-videos: bin/download-videos
     stage-packages:
@@ -40,8 +42,17 @@ parts:
   warzone2100:
     after: [desktop-qt5]
     source: https://github.com/Warzone2100/warzone2100.git
+    override-build: |
+      last_committed_tag="$(git describe --tags --abbrev=0)"
+      last_released_tag="$(snap info warzone2100 | awk '$1 == "beta:" { print $2 }')"
+      # If the latest tag from the upstream project has not been released to
+      # beta, build that tag instead of master.
+      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
+        git fetch
+        git checkout "${last_committed_tag}"
+      fi
+      snapcraftctl build
     source-type: git
-    source-tag: '3.2.3'
     source-depth: 1
     plugin: autotools
     configflags:
