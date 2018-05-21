@@ -39,8 +39,67 @@ parts:
     stage-packages:
       - curl
 
+  sdl:
+    source: https://www.libsdl.org/release/SDL2-2.0.8.tar.gz
+    plugin: autotools
+    configflags:
+    - --prefix=/usr
+    - --disable-alsa
+    - --disable-arts
+    - --disable-esd
+    - --disable-nas
+    - --disable-oss
+    build-packages:
+    - fcitx-libs-dev
+    - libegl1-mesa-dev
+    - libgl1-mesa-dev
+    - libgles2-mesa-dev
+    - libibus-1.0-dev
+    - libjack-dev
+    - libpulse-dev
+    - libsamplerate0-dev
+    - libsndfile1-dev
+    # - libts-dev # not available in xenial - touch screen library
+    - libvulkan-dev
+    - libwayland-dev
+    - libx11-dev
+    - libxcursor-dev
+    - libxext-dev
+    - libxi-dev
+    - libxinerama-dev
+    - libxkbcommon-dev
+    - libxrandr-dev
+    - libxrender-dev
+    - libxss-dev
+    - libxxf86vm-dev
+    stage-packages:
+    - fcitx-libs
+    - libdrm2
+    - libegl1-mesa
+    - libgl1
+    - libgles2
+    - libibus-1.0-5
+    - libjack0
+    - libpulse0
+    - libsamplerate0
+    # - libts0 # not available in xenial - touch screen library
+    - libsndfile1
+    - libwayland-client0
+    - libwayland-egl1-mesa
+    - libvulkan1
+    - libx11-6
+    - libxcursor1
+    - libxext6
+    - libxi6
+    - libxinerama1
+    - libxkbcommon0
+    - libxrandr2
+    - libxrender1
+    - libxss1
+    - libxxf86vm1
+
   warzone2100:
-    after: [desktop-qt5]
+    after: [desktop-qt5, sdl]
     source: https://github.com/Warzone2100/warzone2100.git
     override-build: |
       last_committed_tag="$(git tag | grep -v beta | grep -v master | grep -v v|  sort -n)"
@@ -72,7 +131,6 @@ parts:
       - libphysfs-dev
       - libpng-dev
       - libqt5opengl5-dev
-      - libsdl2-dev
       - libssl-dev
       - libtheora-dev
       - libvorbis-dev
@@ -89,14 +147,16 @@ parts:
       - libglc0
       - libglew1.13
       - libharfbuzz0b
+      - libogg0
       - libopenal1
       - libphysfs1
       - libpng12-0
       - libqt5opengl5
       - libqt5script5
-      - libsdl2-2.0-0
       - libssl1.0.0
       - libtheora0
       - libvorbis0a
+      - libvorbisenc2
+      - libvorbisfile3
       - unzip
       - zip
