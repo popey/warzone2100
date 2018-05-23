@@ -1,6 +1,6 @@
 name: warzone2100
 version: stable
-version-script: git -C parts/warzone2100/build describe --dirty 
+version-script: git -C parts/warzone2100/build describe --tags 
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
 description: |
