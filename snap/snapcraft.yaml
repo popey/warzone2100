@@ -1,6 +1,6 @@
 name: warzone2100
 version: stable
-version-script: git -C parts/warzone2100/src describe --tags 
+version-script: cat $SNAPCRAFT_STAGE/version 
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
 description: |
@@ -110,6 +110,7 @@ parts:
         git fetch
         git checkout "${last_committed_tag}"
       fi
+      echo $last_committed_tag > $SNAPCRAFT_STAGE/version
       snapcraftctl build
     source-type: git
     source-depth: 1
