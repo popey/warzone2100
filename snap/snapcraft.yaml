@@ -16,6 +16,7 @@ apps:
   warzone2100:
     command: desktop-launch $SNAP/usr/bin/warzone2100
     plugs:
+      - audio-playback
       - network
       - network-bind
       - opengl
