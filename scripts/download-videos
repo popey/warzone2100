@@ -1,9 +1,9 @@
 #!/bin/bash
 
-ME=$0
+ME="$0"
 URL=""
 STAMPFILE="$HOME/.downloaded-video-format"
-WARZONEDIR="$HOME/.warzone-3.2"
+WARZONEDIR="$HOME/.local/share/warzone2100-$SNAP_VERSION"
 VIDEOTYPE=""
 VIDEOFILE="$WARZONEDIR/sequences.wz"
 CURRENTVIDEOTYPE="$(cat "$STAMPFILE")"
@@ -27,19 +27,19 @@ usage() {
 case $1 in
 	low|low-en)
 		VIDEOTYPE="low-en"
-		URL="https://kent.dl.sourceforge.net/project/warzone2100/warzone2100/Videos/low-quality-en/sequences.wz"
+		URL="https://sourceforge.net/projects/warzone2100/files/warzone2100/Videos/low-quality-en/sequences.wz/download"
 		;;
 	high|high-en)
 		VIDEOTYPE="high-en"
-		URL="https://kent.dl.sourceforge.net/project/warzone2100/warzone2100/Videos/high-quality-en/sequences.wz"
+		URL="https://sourceforge.net/projects/warzone2100/files/warzone2100/Videos/high-quality-en/sequences.wz/download"
 		;;
 	std|std-en|en)
 		VIDEOTYPE="std-en"
-		URL="https://kent.dl.sourceforge.net/project/warzone2100/warzone2100/Videos/standard-quality-en/sequences.wz"
+		URL="https://sourceforge.net/projects/warzone2100/files/warzone2100/Videos/standard-quality-en/sequences.wz/download"
 		;;
 	std-de|de)
 		VIDEOTYPE="std-de"
-		URL="https://kent.dl.sourceforge.net/project/warzone2100/warzone2100/Videos/standard-quality-de/sequences.wz"
+		URL="https://sourceforge.net/projects/warzone2100/files/warzone2100/Videos/standard-quality-de/sequences.wz/download"
 		;;
 esac
 
@@ -51,5 +51,5 @@ fi
 if [ -z "$CURRENTVIDEOTYPE" -o "$VIDEOTYPE" != "$CURRENTVIDEOTYPE" ]; then
 	[ -e "$VIDEOFILE" ] && rm -f "$VIDEOFILE"
 	mkdir -p "$(dirname "$VIDEOFILE")"
-	curl -o "$VIDEOFILE" "$URL" && echo "$VIDEOTYPE" > "$STAMPFILE"
+	curl -L -o "$VIDEOFILE" "$URL" && echo "$VIDEOTYPE" > "$STAMPFILE"
 fi
