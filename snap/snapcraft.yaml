@@ -1,6 +1,5 @@
 name: warzone2100
-version: stable
-version-script: cat $SNAPCRAFT_STAGE/version 
+adopt-info: warzone2100
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
 description: |
@@ -19,11 +18,13 @@ apps:
     command: usr/bin/warzone2100
     command-chain: [bin/desktop-launch]
     plugs:
+      - audio-playback
       - network
       - network-bind
       - opengl
       - pulseaudio
       - unity7
+      - wayland
       - x11
 
   download-videos:
@@ -61,6 +62,7 @@ parts:
       - libqt5gui5
       - libgdk-pixbuf2.0-0
       - libqt5svg5 # for loading icon themes which are svg
+      - qtwayland5
       - try: [appmenu-qt5] # not available on core18
       - locales-all
 
@@ -126,7 +128,9 @@ parts:
   warzone2100:
     after: [desktop-qt5, sdl]
     source: https://github.com/Warzone2100/warzone2100.git
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
+
       last_committed_tag="$(git  tag | grep -v beta | grep -v master | grep -v v | grep ^[1-9] | tail -n 1)"
       echo "last_committed_tag: $last_committed_tag"
       last_released_tag="$(snap info warzone2100 | awk '$1 == "beta:" { print $2 }')"
@@ -139,8 +143,7 @@ parts:
         echo "git checkout $last_committed_tag ..."
         git checkout "${last_committed_tag}"
       fi
-      echo $last_committed_tag > $SNAPCRAFT_STAGE/version
-      snapcraftctl build
+      snapcraftctl set-version "$last_committed_tag"
     source-type: git
     plugin: autotools
     configflags:
