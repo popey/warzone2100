@@ -133,7 +133,7 @@ parts:
 
       last_committed_tag="$(git  tag | grep -v beta | grep -v master | grep -v v | grep ^[1-9] | tail -n 1)"
       echo "last_committed_tag: $last_committed_tag"
-      last_released_tag="$(snap info warzone2100 | awk '$1 == "beta:" { print $2 }')"
+      last_released_tag="$(snap info warzone2100 | awk '$1 == "latest/beta:" { print $2 }')"
       echo "last_released_tag: $last_released_tag"
       # If the latest tag from the upstream project has not been released to
       # beta, build that tag instead of master.
