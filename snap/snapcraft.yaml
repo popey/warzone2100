@@ -2,6 +2,7 @@ name: warzone2100
 adopt-info: warzone2100
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
+license: GPL-2.0
 description: |
   In Warzone 2100, you command the forces of The Project in a battle to rebuild the world after mankind has almost been destroyed by nuclear missiles.
 
@@ -19,6 +20,8 @@ apps:
     command-chain: [bin/desktop-launch]
     plugs:
       - audio-playback
+      - desktop
+      - desktop-legacy
       - network
       - network-bind
       - opengl
@@ -65,6 +68,7 @@ parts:
       - qtwayland5
       - try: [appmenu-qt5] # not available on core18
       - locales-all
+      - libgtk2.0-0
 
   sdl:
     source: https://www.libsdl.org/release/SDL2-2.0.10.tar.gz
@@ -149,14 +153,14 @@ parts:
       fi
       snapcraftctl set-version "$last_committed_tag"
     source-type: git
-    plugin: autotools
+    plugin: cmake
     configflags:
-      - --prefix=/usr
-      - --disable-debug
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DWZ_DISTRIBUTOR=Snapcraft
     build-packages:
+      - asciidoctor
       - gettext
-      - libcrypto++-dev
-      - libcryptsetup-dev
       - libfontconfig1-dev
       - libfreetype6-dev
       - libfribidi-dev
@@ -166,17 +170,16 @@ parts:
       - libopenal-dev
       - libphysfs-dev
       - libpng-dev
-      - libqt5opengl5-dev
-      - libssl-dev
       - libtheora-dev
       - libvorbis-dev
       - qtbase5-dev
       - qtscript5-dev
+      - libcurl4-gnutls-dev
+      - gnutls-dev
+      - libsodium-dev
       - unzip
       - zip
     stage-packages:
-      - libcrypto++6
-      - libcryptsetup12
       - libfontconfig1
       - libfreetype6
       - libfribidi0
@@ -189,10 +192,12 @@ parts:
       - libpng16-16
       - libqt5opengl5
       - libqt5script5
-      - libssl1.0.0
       - libtheora0
       - libvorbis0a
       - libvorbisenc2
       - libvorbisfile3
+      - libcurl3-gnutls
+      - libsodium23
+      - libglu1-mesa
       - unzip
       - zip
