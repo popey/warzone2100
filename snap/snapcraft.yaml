@@ -93,7 +93,7 @@ parts:
     - libpulse-dev
     - libsamplerate0-dev
     - libsndfile1-dev
-    # - libts-dev # not available in xenial - touch screen library
+    - libts-dev
     - libvulkan-dev
     - libwayland-dev
     - libx11-dev
@@ -116,7 +116,7 @@ parts:
     - libjack0
     - libpulse0
     - libsamplerate0
-    # - libts0 # not available in xenial - touch screen library
+    - libts0
     - libsndfile1
     - libwayland-client0
     - libwayland-egl1-mesa
@@ -163,6 +163,7 @@ parts:
       - -DWZ_DISTRIBUTOR=Snapcraft
     build-packages:
       - asciidoctor
+      - g++
       - gettext
       - libfontconfig1-dev
       - libfreetype6-dev
