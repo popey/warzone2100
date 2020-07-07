@@ -2,7 +2,7 @@ name: warzone2100
 adopt-info: warzone2100
 summary: A free and open source real time strategy game
 icon: icons/warzone2100.large.png
-license: GPL-2.0
+license: GPL-2.0+
 description: |
   In Warzone 2100, you command the forces of The Project in a battle to rebuild the world after mankind has almost been destroyed by nuclear missiles.
 
