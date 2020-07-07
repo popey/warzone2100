@@ -71,7 +71,7 @@ parts:
       - libgtk2.0-0
 
   sdl:
-    source: https://www.libsdl.org/release/SDL2-2.0.10.tar.gz
+    source: https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
     plugin: autotools
     configflags:
     - --prefix=/usr
@@ -80,6 +80,9 @@ parts:
     - --disable-esd
     - --disable-nas
     - --disable-oss
+    override-build: |
+      snapcraftctl build
+      sed -i 's|"/usr"|"'"$SNAPCRAFT_STAGE/usr"'"|g' "$SNAPCRAFT_PART_INSTALL/usr/lib/cmake/SDL2/sdl2-config.cmake"
     build-packages:
     - fcitx-libs-dev
     - libegl1-mesa-dev
